@@ -1,38 +1,253 @@
-.App {
-  text-align: center;
-}
+.App {text-align: left;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  min-height: 200vh;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background: linear-gradient(135deg, rgba(220, 176, 237, 0.68) 0%, rgba(137, 207, 240, 0.75) 100%);
+}
+
+select {
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+label {
+  color: black;
+}
+
+.App-header {
+  max-width: 50rem;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+.App-header h1 {
+  margin-right: auto;
+}
+
+.App-header:hover {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+
+/* Targeting all <select> elements directly */
+select {
+  background-color: #EEF5FF; /* Blue background */
+  color: black; /* White text */
+  padding: 8px; /* Some padding for aesthetics */
+  border-radius: 4px; /* Rounded borders */
+  border: 1px solid #2980b9; /* Darker blue border for some contrast */
+  font-size: 16px; /* Larger font size for readability */
+  cursor: pointer; /* Change cursor to indicate it's clickable */
+}
+
+/* Styling options */
+select option {
+  background-color: white; /* Background for options */
+  color: black; /* Text color for options */
+}
+
+
+.description {
+  margin-left: 0.5rem;
+}
+
+
+.file-upload-wrapper {
+  margin: 10px 2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Creates a gap between the button and the file name */
+}
+
+.file-upload-btn {
+  background-color: #4CAF50;
   color: white;
+  padding: 8px 16px; /* Adjusted for a smaller size */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px; /* Smaller font size */
+  transition: background-color 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.file-upload-btn:hover {
+  background-color: #45a049;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.file-name {
+  color: #333;
+  font-size: 14px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between; /* Aligns items on the main axis */
+  align-items: center; /* Aligns items on the cross axis */
+  width: 100%; /* Ensures the container fills its parent */
+}
+
+.App-logo {
+  height: 40px;
+  margin-left: auto;
+  /*margin-bottom: 20px;*/
+  color: #0D9276;
+}
+
+.App-description {
+  color: #333; /* Adjust based on your color scheme */
+  margin: 0rem auto;
+  padding: 10px;
+  /*background-color: rgba(255, 255, 255, 0.6);*/
+  border-radius: 10px;
+  width: 100%;
+}
+
+input[type="file"] {
+  border: 2px solid #0D9276;
+  background-color: transparent;
+  padding: 8px 15px;
+  border-radius: 20px;
+  color: #0D9276;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+select {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+section {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  width: 80%;
+}
+
+p {
+  color: #0D9276;
+}
+
+h1 {
+  color: #333;
+}
+
+h2 {
+  color: #333;
+}
+
+
+
+.language-selection-container {
+  display: flex;
+  justify-content: space-between; /* This will put some space between the two divs */
+  align-items: center; /* This will vertically align the contents of your divs if they have different heights */
+  width: 100%; /* Adjust the width as needed, or set to max-width of the parent container */
+  padding: 0 1rem; /* Optional: adds some padding on the sides */
+}
+
+.source-lang, .target-lang {
+  flex: 1; /* This makes each div take up equal space */
+}
+
+/* You may want to adjust the select width for smaller screens or add more responsive styles */
+@media (max-width: 768px) {
+  .language-selection-container {
+    flex-direction: column; /* Stack the language selectors vertically on smaller screens */
   }
 }
+
+
+
+
+
+/* Ensures .translate-button-container effectively centers its children */
+.translate-button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
+/* Adjustments to .translate-button for clarity */
+.translate-button {
+  background-color: #0D9276; /* Sky green background */
+  color: white;
+  margin: 1.5rem 0 1rem;
+  padding: 12px 24px; /* Adjust size as needed */
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.translate-button:hover {
+  background-color: #0B60B0; /* Darker on hover */
+}
+
+.translate-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+.translate-button-container {
+  text-align: center;
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically if the container has a defined height */
+  width: 100%;
+  /* height: 100%; Uncomment if you need to define height explicitly */
+}
+
+
+.translate-button {
+  background-color: #3498db; /* Updated to a blue color */
+  color: white;
+  padding: 12px 24px; /* Adjust size as needed */
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-top: 2rem;
+}
+
+.translate-button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+}
+
+.translate-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/*.file-upload-btn {*/
+/*  background-color: #3498db; !* Blue color *!*/
+/*  color: white;*/
+/*  padding: 8px 16px; !* Adjusted for a smaller size *!*/
+/*  border: none;*/
+/*  border-radius: 4px;*/
+/*  cursor: pointer;*/
+/*  font-size: 14px; !* Smaller font size *!*/
+/*  transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.file-upload-btn:hover {*/
+/*  background-color: #2980b9; !* Darker blue on hover *!*/
+/*}*/

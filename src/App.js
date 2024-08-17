@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import WaitingPage from 'pages/WaitingPage';
-import MainPage from 'pages/MainPage';
+import WaitingPage from './pages/WaitingPage';
+import MainPage from './pages/MainPage';
 import SubtitlesParser from 'subtitles-parser';
 
 function App() {

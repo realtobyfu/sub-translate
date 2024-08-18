@@ -1,19 +1,77 @@
 import React from 'react';
+// import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLanguage } from '@fortawesome/free-solid-svg-icons';
-import TranslateButton from '../components/TranslateButton';
+import TranslateButton from '../components/TranslateButton';  // Import the TranslateButton component
 
 function MainPage({
+                      parsedSubtitles,
                       uploadedFile,
                       fileName,
                       sourceLanguage,
                       targetLanguage,
-                      parsedSubtitles,
-                      handleFileUpload,
                       languages,
                       setSourceLanguage,
                       setTargetLanguage,
+                      setUploadedFile,
+                      setFileName,
+                      setParsedSubtitles,  // Receive setParsedSubtitles as a prop
                   }) {
+    // const navigate = useNavigate();
+
+    const handleFileUpload = async (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            console.log('Uploaded file:', file);
+            setFileName(file.name);
+            setUploadedFile(true);
+
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const content = e.target.result;
+                const parsed = parseSRT(content);
+                setParsedSubtitles(parsed);  // Update parsedSubtitles state
+                console.log("parsed subtitle:", parsed)
+            };
+            reader.readAsText(file);
+        }
+    };
+
+    // Function to parse the .srt content into segments
+    const parseSRT = (content) => {
+        const segments = content.trim().split('\n\n');
+        return segments.map(segment => {
+            const lines = segment.split('\n');
+
+            let text = "";
+            let combined = false;
+
+            if (lines.length > 3) { // If there are more than 2 lines of text in the subtitle
+                const firstLine = lines[2];
+                const secondLine = lines[3];
+
+                // Only combine lines when there's no terminating punctuation and the second line doesn't start with "- " or "—"
+                if (!/[.!?]$/.test(firstLine) && !/^-|^—/.test(secondLine)) {
+                    // Combine the lines
+                    text = `${firstLine} ${secondLine}`;
+                    combined = true;
+                } else {
+                    // Keep the lines separate
+                    text = `${firstLine}\n${secondLine}`;
+                }
+            } else {
+                text = lines.slice(2).join('\n'); // Use '\n' to keep the original line breaks intact
+            }
+
+            return {
+                index: lines[0],
+                timestamp: lines[1],
+                combined: combined,
+                text: text // Keep the text as is, with no trimming
+            };
+        });
+    };
+
     return (
         <>
             <div className="header-content">

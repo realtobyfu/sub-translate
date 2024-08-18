@@ -229,6 +229,63 @@ h2 {
   transition: background-color 0.3s ease;
 }
 
+.abort-button {
+  background-color: white; /* Sky green background */
+  color: black;
+  margin: 1.5rem 0 1rem;
+  padding: 12px 24px; /* Adjust size as needed */
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+
+.download-button {
+  background-color: #3498db; /* Updated to a blue color */
+  color: white;
+  margin: 1.5rem 0 1rem;
+  margin-left: 2rem;
+  padding: 12px 24px; /* Adjust size as needed */
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+}
+
+
+.go-back-button {
+  position: absolute;
+  margin-top: 3rem;
+  margin-left: 10rem;
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px; /* Adjusted for a smaller size */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px; /* Smaller font size */
+  transition: background-color 0.3s ease;
+
+  /*margin: 1.5rem 0 1rem;*/
+  /*padding: 12px 24px; !* Adjust size as needed *!*/
+  /*border-radius: 8px;*/
+  /*border: none;*/
+  /*cursor: pointer;*/
+  /*font-size: 16px;*/
+  /*transition: background-color 0.3s ease;*/
+}
+
+.go-back-button:hover {
+  background-color: #0D9276; /* Sky green background */
+}
+
 .translate-button:hover {
   background-color: #0B60B0; /* Darker on hover */
 }

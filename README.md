@@ -1,75 +1,106 @@
-<<<<<<< HEAD
-# sub-translate
-sub-translate is a Web App that helps the user to translate movie subtitle files (.srt) from one language to another.
-=======
-# Getting Started with Create React App
+# Subtitle Translator
+Subtitle Translator is a web application that allows users to upload `.srt` subtitle files and translate them into a different language.
+The tool ensures that the translated subtitles retain their original formatting and structure.
+The application is built using React.js, JavaScript to parse the subtitles and send the requests.
+It also runs a Flask application in the backend which calls the [googletrans library](https://pypi.org/project/googletrans/), and googletrans uses the Google Ajax API to make calls to translate.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Initial Screen:
+![screenshot](screenshot-1.png)
 
-## Available Scripts
+Waiting Screen (success):
+![screenshot](screenshot-2.png)
 
-In the project directory, you can run:
+## Files:
 
-### `npm start`
+- **`src/`**: Contains the React application code.
+   - **`components/`**: Reusable components such as `TranslateButton`.
+   - **`pages/`**: Contains the `MainPage` and `WaitingPage` components for the main interface.
+   - **`App.js`**: The main entry point for the React app.
+   - **`index.js`**: Renders the React application to the DOM.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **`backend/`**
+  - **`server.py`**: The Flask backend server, which handles translation requests.
+- **`package.json`**: Manages Node.js dependencies and scripts for the frontend.
+- **`requirements.txt`**: Lists the Python dependencies required for the Flask backend.
+- **`README.md`**: Documentation for the project.
+- **`.gitignore`**: Specifies files and directories that should be ignored by Git, such as `node_modules/` and `.venv/`.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Features
+- **Upload and Translate**: Easily upload `.srt` files for translation.
+- **Language Selection**: Choose source and target languages for translation. * From and To languages need to be different.
+- **Preserve Formatting**: Retains the original structure and formatting of subtitles.
+- **Progress Tracking**: Monitor the translation progress with a progress bar.
+- **Download Translated File**: Download the translated subtitle file in `.srt` format.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [Node.js](https://nodejs.org/)
+- [Python](https://www.python.org/)
+- Flask (`pip install Flask`)
+- Flask-CORS (`pip install flask-cors`)
+- googletrans (`pip install googletrans==4.0.0-rc1`)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/your-username/subtitle-translator.git
+    cd subtitle-translator
+    ```
 
-### `npm run eject`
+2. **Install the required Node.js dependencies**:
+    ```bash
+    npm install
+    ```
+   
+3. **Create a local environment folder**:
+    ```bash
+    python3 -m venv .venv
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. **Activate the virtual environment**:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   - On macOS/Linux:
+     ```bash
+     source .venv/bin/activate
+     ```
+   - On Windows:
+     ```bash
+     .venv\Scripts\activate
+     ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+5. **Install Python dependencies (required for backend)**:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+6. **Start the Flask server**:
+    ```bash
+    python backend/server.py
+    ```
 
-## Learn More
+7. **Start the React application (in a different terminal)**:
+    ```bash
+    npm start
+    ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+8. **Open your browser and go to `http://localhost:3000`.**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Usage
 
-### Code Splitting
+1. Upload a `.srt` file by clicking the "Select File" button.
+2. Choose the source language (auto-detect by default) and target language for translation.
+3. Click "Translate Subtitles" to start the translation process.
+4. Track the translation progress on the waiting page.
+5. Once translation is complete, download the translated subtitle file.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Contributing
 
-### Analyzing the Bundle Size
+To contribute, lease fork this repository, create a new branch, and submit a pull request with your changes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## License
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> f8b2f93 (Initialize project using Create React App)
+This project is licensed under the MIT License.

@@ -52,6 +52,7 @@ const WaitingPage = () => {
     const translateLine = async (text, srcLang, destLang) => {
         try {
             const response = await fetch('http://127.0.0.1:5000/translate_line', {
+
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,6 +65,7 @@ const WaitingPage = () => {
             });
 
             const data = await response.json();
+            console.log(data)
             return response.ok ? data.translatedLine : text;
         } catch (error) {
             console.error('Translation error:', error);

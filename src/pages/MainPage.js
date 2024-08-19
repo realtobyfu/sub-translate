@@ -38,39 +38,85 @@ function MainPage({
     };
 
     // Function to parse the .srt content into segments
+    // alternative splitting to make it with larger files
+// Function to parse the .srt content into segments
+    // Function to parse the .srt content into segments
     const parseSRT = (content) => {
-        const segments = content.trim().split('\n\n');
-        return segments.map(segment => {
-            const lines = segment.split('\n');
+        const lines = content.split(/\r?\n/); // Split by line breaks (handles both Windows and Unix formats)
+        const segments = [];
+        let currentSegment = {};
+        let currentTextLines = [];
 
-            let text = "";
-            let combined = false;
+        lines.forEach(line => {
+            if (/^\d+$/.test(line)) { // Line is an index number
+                if (currentSegment.index) {
+                    // Push the current segment into the array before starting a new one
+                    currentSegment.text = processTextLines(currentTextLines);
+                    segments.push(currentSegment);
+                    currentTextLines = [];
+                }
+                // Start a new segment
+                currentSegment = {
+                    index: line,
+                    timestamp: '',
+                    combined: false, // Initialize combined as false
+                    text: ''
+                };
+            } else if (/^\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}$/.test(line)) { // Line is a timestamp
+                currentSegment.timestamp = line;
+            } else if (line.trim() === '') { // Empty line indicates the end of a segment
+                if (currentSegment.index) {
+                    const { text, combined } = processTextLines(currentTextLines); // Get text and combined status
 
-            if (lines.length > 3) { // If there are more than 2 lines of text in the subtitle
-                const firstLine = lines[2];
-                const secondLine = lines[3];
-
-                // Only combine lines when there's no terminating punctuation and the second line doesn't start with "- " or "—"
-                if (!/[.!?]$/.test(firstLine) && !/^-|^—/.test(secondLine)) {
-                    // Combine the lines
-                    text = `${firstLine} ${secondLine}`;
-                    combined = true;
-                } else {
-                    // Keep the lines separate
-                    text = `${firstLine}\n${secondLine}`;
+                    if (combined) {
+                        console.log("combined is set to true", text, currentSegment.index)
+                    }
+                    currentSegment.text = text;
+                    currentSegment.combined = combined; // Set combined flag
+                    segments.push(currentSegment);
+                    currentSegment = {};
+                    currentTextLines = [];
                 }
             } else {
-                text = lines.slice(2).join('\n'); // Use '\n' to keep the original line breaks intact
+                // It's part of the subtitle text
+                currentTextLines.push(line);
             }
-
-            return {
-                index: lines[0],
-                timestamp: lines[1],
-                combined: combined,
-                text: text // Keep the text as is, with no trimming
-            };
         });
+
+        // Push the last segment if there is any
+        if (currentSegment.index) {
+            const { text, combined } = processTextLines(currentTextLines);
+            currentSegment.text = text;
+            currentSegment.combined = combined;
+            segments.push(currentSegment);
+        }
+
+        return segments;
     };
+
+// Helper function to process the text lines of a segment
+    const processTextLines = (lines) => {
+        let combined = false;
+        let text = "";
+
+        if (lines.length > 1) {
+            const firstLine = lines[0];
+            const secondLine = lines[1];
+
+            // Only combine lines when there's no terminating punctuation and the second line doesn't start with "- " or "—"
+            if (!/[.!?]$/.test(firstLine) && !/^-|^—/.test(secondLine)) {
+                combined = true;
+                text = `${firstLine} ${secondLine}`; // Combine the lines
+            } else {
+                text = lines.join('\n'); // Keep the lines separate with original line breaks
+            }
+        } else {
+            text = lines.join('\n'); // Single line, return as is
+        }
+
+        return { text, combined }; // Return both text and combined flag
+    };
+
 
     return (
         <>

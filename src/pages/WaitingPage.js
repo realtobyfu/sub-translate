@@ -40,6 +40,8 @@ const WaitingPage = () => {
 
         translateSubtitles();
 
+        // console.log("translated", translatedSubtitles)
+
         return () => {
             controller.abort();
             setProgress(0);
@@ -75,14 +77,13 @@ const WaitingPage = () => {
 
             if (segment.combined) {
                 const splitText = splitIntoEvenLines(segment.text);
-                text = `${splitText[0]}\n${splitText[1]}`; // Use '\n' to separate the split lines
+                text = `${splitText[0]}\n${splitText[1]}`; // Ensure split lines are separated correctly
             } else {
-                text = segment.text; // Keep the text as is, without trimming
+                text = segment.text; // Use the original translated text if not combined
             }
-            console.log("index: ", segment.index, "text: ", segment.text, " timestamp: ", segment.timestamp)
 
-            return `${segment.index}\n${segment.timestamp}\n${text}`; // Ensure each segment is properly formatted
-        }).join('\n\n'); // Use double newline to separate SRT segments
+            return `${segment.index}\n${segment.timestamp}\n${text}`; // Properly format each segment
+        }).join('\n\n'); // Separate SRT segments by double newlines
 
         const element = document.createElement('a');
         const file = new Blob([srtContent], { type: 'text/plain' });

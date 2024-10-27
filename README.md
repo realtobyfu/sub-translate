@@ -97,10 +97,6 @@ Waiting Screen (success):
 4. Track the translation progress on the waiting page.
 5. Once translation is complete, download the translated subtitle file.
 
-## Contributing
-
-To contribute, lease fork this repository, create a new branch, and submit a pull request with your changes.
-
 ## License
 
 This project is licensed under the MIT License.
